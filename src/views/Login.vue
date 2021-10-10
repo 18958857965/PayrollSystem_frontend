@@ -90,10 +90,7 @@
                width="30%">
 
       <Register></Register>
-      <div slot="footer" class="dialog-footer">
-        <el-button size="small" @click="isRegister = false">取 消</el-button>
-        <el-button size="small" type="primary" @click="isRegister = false">确 定</el-button>
-      </div>
+
     </el-dialog>
 
 
@@ -123,7 +120,7 @@ export default {
       },
       loginFormPhone: {
         phone: "",
-        code: 0,
+        code: '',
         //usertype: "",
       },
       rules: {

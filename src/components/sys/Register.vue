@@ -25,7 +25,7 @@ export default {
     return {
       registerForm: {
         phone: '',
-        code: 0
+        code: ''
       },
     }
   },
@@ -43,7 +43,7 @@ export default {
       if(this.registerForm.phone&&this.registerForm.code!==0){
         this.postRequest("/register", this.registerForm).then(resp => {
           if (resp.result===true) {
-            this.$message('注册成功,可以使用手机号登录 !')
+            this.$message('注册成功 !')
           }
         })
 
