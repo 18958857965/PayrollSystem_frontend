@@ -29,6 +29,17 @@
       </el-date-picker>
       <div v-if="reportType===1" class="inputInfo" style="margin-top: 5px;">
         <el-input placeholder="请输入项目id" clearable v-model="send.pid" size="small" style="width: 220px">
+          <el-select v-model="send.pid" @change="showProject" placeholder="请选择项目" filterable class="inputInfo"
+                     style="margin-right: 100px" size="small" clearable>
+            <el-option
+                v-for="item in project"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+            >
+              <span style=" color: #8492a6; font-size: 13px">{{ item.name }}</span>
+            </el-option>
+          </el-select>
 
         </el-input>
       </div>
@@ -76,6 +87,7 @@ export default {
   name: "Em_Reprot",
   data() {
     return {
+      project:[],
       src: '',
       reportType: '',
       send: {
@@ -108,6 +120,34 @@ export default {
 
   },
   methods: {
+    showProject() {
+      this.$notify.closeAll();
+      this.postRequest('/project/get?cid=' + this.$store.state.company.cid + '&pid=' + this.send.pid).then(async (resp) => {
+        if (resp) {
+          let data = ['项目编号:' + resp.result.id,
+            '项目名称:' + resp.result.name,
+            '项目描述:' + resp.result.description];
+          const h = this.$createElement;
+          await this.$notify({
+            title: '项目信息',
+            message: h('i', null, data
+            )
+          });
+
+        }
+      })
+
+
+    },
+    getProject() {
+      this.postRequest('/project/getAll?cid=' + this.$store.state.company.cid).then(resp => {
+        if (resp && resp.result.length && resp.result.length > 0) {
+          this.project = resp.result;
+
+
+        }
+      })
+    },
     empPid() {
       this.send.pid = '';
 

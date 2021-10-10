@@ -85,7 +85,7 @@ export const putRequest = (url, params) => {
 
 }
 
-/*export const getRequest = (url, params) => {
+export const getRequest = (url, params) => {
 
     return axios({
         method: 'get',
@@ -95,7 +95,7 @@ export const putRequest = (url, params) => {
 
     })
 
-}*/
+}
 export const deleteRequest = (url, params) => {
 
     return axios({

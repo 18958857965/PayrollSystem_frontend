@@ -130,10 +130,8 @@ export default {
   name: "AttendanceRecord",
   data() {
     return {
-
       AR_add: false,
       project: [],
-
       emp: [],
       addAR: [{
         pid: '',
@@ -147,7 +145,6 @@ export default {
     }
   },
   mounted() {
-
     this.initARTable();
     this.getProject();
   },
@@ -156,7 +153,6 @@ export default {
       this.$notify.closeAll();
       this.postRequest('/project/get?cid=' + this.$store.state.company.cid + '&pid=' + this.addAR[0].pid).then(async (resp) => {
         if (resp) {
-
           let data = ['项目编号:' + resp.result.id,
             '项目名称:' + resp.result.name,
             '项目描述:' + resp.result.description];
