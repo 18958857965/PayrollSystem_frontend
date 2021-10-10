@@ -51,22 +51,22 @@
         </el-table-column>
         <el-table-column
             prop="location"
-            label="location"
+            label="居住地"
             width="90">
         </el-table-column>
         <el-table-column
             prop="socialCode"
-            label="socialCode"
+            label="社保号"
             width="90">
         </el-table-column>
         <el-table-column
             prop="tax"
-            label="tax"
+            label="税"
             width="90">
         </el-table-column>
         <el-table-column
             prop="otherTax"
-            label="otherTax"
+            label="其他扣除额"
             width="90">
         </el-table-column>
         <el-table-column
@@ -76,12 +76,12 @@
         </el-table-column>
         <el-table-column
             prop="percent"
-            label="percent"
+            label="佣金率"
             width="90">
         </el-table-column>
         <el-table-column
             prop="lenLimit"
-            label="lenlimit"
+            label="工时限制"
             width="90">
         </el-table-column>
         <el-table-column
@@ -133,7 +133,7 @@
           <el-option label="管理员" value="2"></el-option>
         </el-select>
         <div></div>
-        <el-tag class="tag">location</el-tag>
+        <el-tag class="tag">居住地</el-tag>
         <el-input
             size="small"
             class="updateOR"
@@ -141,22 +141,28 @@
         </el-input>
 
         <div></div>
-        <el-tag class="tag">socialCode</el-tag>
+        <el-tag class="tag">社保号</el-tag>
         <el-input v-model="addStaff.socialCode" size="small" class="updateOR"></el-input>
         <div></div>
-        <el-tag class="tag">tax</el-tag>
+        <el-tag class="tag">税</el-tag>
         <el-input v-model="addStaff.tax" size="small" class="updateOR"></el-input>
         <div></div>
-        <el-tag class="tag">otherTax</el-tag>
+        <el-tag class="tag">其他扣除额</el-tag>
         <el-input v-model="addStaff.otherTax" size="small" class="updateOR"></el-input>
         <div></div>
         <el-tag class="tag">薪资(每月)</el-tag>
         <el-input v-model="addStaff.salary" size="small" class="updateOR"></el-input>
         <div></div>
-        <el-tag class="tag">percent</el-tag>
-        <el-input v-model="addStaff.percent" size="small" class="updateOR"></el-input>
+        <el-tag class="tag">佣金率</el-tag>
+        <el-select v-model="addStaff.percent" size="small">
+          <el-option label="无佣金" value=0></el-option>
+          <el-option label="0.1" value=0.1></el-option>
+          <el-option label="0.15" value=0.15></el-option>
+          <el-option label="0.25" value=0.25></el-option>
+          <el-option label="0.35" value=0.35></el-option>
+        </el-select>
         <div></div>
-        <el-tag class="tag">lenLimite</el-tag>
+        <el-tag class="tag">工时限制</el-tag>
         <el-input v-model="addStaff.lenLimit" size="small" class="updateOR"></el-input>
         <div></div>
         <!--        <el-tag class="tag">公司id</el-tag>
@@ -202,30 +208,37 @@
           <el-option label="管理员" value="2"></el-option>
         </el-select>
         <div></div>
-        <el-tag class="tag">location</el-tag>
+        <el-tag class="tag">居住地</el-tag>
         <el-input
             size="small"
             class="updateOR"
             v-model="updateStaff.location">
+
         </el-input>
 
         <div></div>
-        <el-tag class="tag">socialCode</el-tag>
+        <el-tag class="tag">社保号</el-tag>
         <el-input v-model="updateStaff.socialCode" size="small" class="updateOR"></el-input>
         <div></div>
-        <el-tag class="tag">tax</el-tag>
+        <el-tag class="tag">税</el-tag>
         <el-input v-model="updateStaff.tax" size="small" class="updateOR"></el-input>
         <div></div>
-        <el-tag class="tag">otherTax</el-tag>
+        <el-tag class="tag">其他扣除额</el-tag>
         <el-input v-model="updateStaff.otherTax" size="small" class="updateOR"></el-input>
         <div></div>
         <el-tag class="tag">薪资(每月)</el-tag>
         <el-input v-model="updateStaff.salary" size="small" class="updateOR"></el-input>
         <div></div>
-        <el-tag class="tag">percent</el-tag>
-        <el-input v-model="updateStaff.percent" size="small" class="updateOR"></el-input>
+        <el-tag class="tag">佣金率</el-tag>
+        <el-select v-model="updateStaff.percent" size="small">
+          <el-option label="无佣金" value=0></el-option>
+          <el-option label="0.1" value=0.1></el-option>
+          <el-option label="0.15" value=0.15></el-option>
+          <el-option label="0.25" value=0.25></el-option>
+          <el-option label="0.35" value=0.35></el-option>
+        </el-select>
         <div></div>
-        <el-tag class="tag">lenLimite</el-tag>
+        <el-tag class="tag">工时限制</el-tag>
         <el-input v-model="updateStaff.lenLimit" size="small" class="updateOR"></el-input>
         <div></div>
 

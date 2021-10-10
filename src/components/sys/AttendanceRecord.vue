@@ -198,6 +198,7 @@ export default {
 
         this.addAR[0].time = this.addAR[0].time + ' 00:00:00'
         this.postRequest('/sign/sign?cid=' + this.$store.state.company.cid, this.addAR).then(resp => {
+          console.log(resp);
           if (resp) {
             this.initARTable();
 

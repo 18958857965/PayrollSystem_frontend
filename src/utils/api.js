@@ -34,7 +34,7 @@ axios.interceptors.response.use(
         return success.data;
     },
     error => {
-        return;
+
         if (error.response.code == 504 || error.response.code == 404) {
             Message.error({ message: '无法访问页面' });
         }
@@ -85,7 +85,7 @@ export const putRequest = (url, params) => {
 
 }
 
-export const getRequest = (url, params) => {
+/*export const getRequest = (url, params) => {
 
     return axios({
         method: 'get',
@@ -95,7 +95,7 @@ export const getRequest = (url, params) => {
 
     })
 
-}
+}*/
 export const deleteRequest = (url, params) => {
 
     return axios({

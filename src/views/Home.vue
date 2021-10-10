@@ -3,11 +3,11 @@
   <div>
     <el-container>
       <el-header class="homeHeader">
-        <div class="title">Header</div>
-        <el-dropdown class="userInfo" @command="commandHandler">
-                    <span class="el-dropdown-link">
-                        <div class="">
-                           尊敬的{{ this.$store.state.user.name }},您好
+        <div class="title">工资单管理系统</div>
+        <el-dropdown class="userInfo" @command="commandHandler" style=" float: right;margin-left: 1170px">
+                    <span class="el-dropdown-link"  >
+                        <div >
+                               尊敬的   [{{ this.$store.state.user.name }}]  ,您好
 
                         </div>
                     </span>
@@ -29,7 +29,7 @@
       </el-header>
       <el-container>
         <el-aside width="200px" v-if="this.$store.state.employee">
-          <el-menu @select="menuClick" :default-openeds="['1']" unique-opened>
+          <el-menu @select="menuClick"  >
             <el-submenu index="1">
               <template slot="title"
               ><i class="el-icon-location"></i
@@ -55,7 +55,7 @@
               </template
               >
               <el-menu-item index="/admin_staffinfo">员工信息</el-menu-item>
-              <el-menu-item index="/admin_management">报告管理</el-menu-item>
+              <el-menu-item index="/admin_management">管理报告</el-menu-item>
               <el-menu-item index="/goodinfo">商品管理</el-menu-item>
               <el-menu-item index="/projectinfo">项目管理</el-menu-item>
             </el-submenu>
@@ -190,7 +190,7 @@ export default {
   box-sizing: border-box;
 }
 
-.homeHeader .userInfo {
+.homeHeader.userInfo {
   cursor: pointer;
 }
 

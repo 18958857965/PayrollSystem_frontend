@@ -2,7 +2,8 @@
   <div class="border">
 
     <div>
-      <el-select v-model="reportType" placeholder="请选择需要的报告类型" class="inputInfo" style="margin-right: 100px">
+      <el-select v-model="reportType" placeholder="请选择需要的报告类型" class="inputInfo" style="margin-right: 100px"
+                 @change="empPid">
         <el-option
             v-for="item in options"
             :key="item.value"
@@ -14,16 +15,19 @@
           class="inputInfo"
           v-model="send.startTime"
           type="datetime"
-          placeholder="选择开始日期时间">
+          placeholder="选择开始日期时间"
+          value-format="yyyy-MM-dd HH:mm:ss">
       </el-date-picker>
       <span style="margin-left: 10px;margin-right: 10px">至</span>
       <el-date-picker
           class="inputInfo"
-          v-model="send.endingTime"
+          v-model="send.endTime"
           type="datetime"
-          placeholder="选择截止日期时间">
+          placeholder="选择截止日期时间"
+          value-format="yyyy-MM-dd HH:mm:ss"
+      >
       </el-date-picker>
-      <div v-if="send.reportType==='项目总工时'" class="inputInfo" style="margin-top: 5px;">
+      <div v-if="reportType===1" class="inputInfo" style="margin-top: 5px;">
         <el-input placeholder="请输入项目id" clearable v-model="send.pid" size="small" style="width: 220px">
 
         </el-input>
@@ -54,8 +58,8 @@
         </el-col>
         <el-col :span="5">
           <el-button round @click="renderReport">确认生成报告</el-button>
-          <el-button type="primary" icon="el-icon-download" circle @click="download"></el-button>
-          <el-button type="success" icon="el-icon-share" circle @click="share"></el-button>
+<!--          <el-button type="primary" icon="el-icon-download" circle @click="download"></el-button>
+          <el-button type="success" icon="el-icon-share" circle @click="share"></el-button>-->
         </el-col>
 
 
@@ -75,10 +79,10 @@ export default {
       src: '',
       reportType: '',
       send: {
-        employeeId: [],
+        uid:this.$store.state.employee.uid,
         startTime: '',
-        endingTime: '',
-        pid:''
+        endTime: '',
+        pid: ''
       },
 
       options: [
@@ -104,12 +108,16 @@ export default {
 
   },
   methods: {
+    empPid() {
+      this.send.pid = '';
 
+    },
     renderReport() {
-      if (this.send.startTime && this.send.endingTime && this.reportType) {
+      console.log(this.send.startTime && this.send.endTime && this.reportType!==null)
+      if (this.send.startTime && this.send.endTime && this.reportType!==null) {
 
         if (this.reportType !== '项目总工时' || (this.reportType === '项目总工时' && this.send.pid)) {
-          this.postRequest('/report/draw?cid=' + this.$store.state.company.cid + '&code=' + this.reportType).then(resp => {
+          this.postRequest('/report/draw?cid=' + this.$store.state.company.cid + '&code=' + this.reportType,this.send).then(resp => {
             if (resp) {
               this.src = resp.result;
             } else {

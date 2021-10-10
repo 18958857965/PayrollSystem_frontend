@@ -8,7 +8,7 @@
         <el-form-item label="员工id" size="small">
           <el-input v-model="employeeForm.id" size="small" disabled></el-input>
         </el-form-item>
-        <el-form-item label="用户id" prop="uid" size="small">
+        <el-form-item label="用户id"  size="small">
           <el-input v-model="employeeForm.uid" size="small" disabled></el-input>
         </el-form-item>
         <el-form-item label="公司id" size="small">
@@ -24,26 +24,33 @@
             <el-option label="管理员" value="2"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="location" size="small">
+        <el-form-item label="居住地址" size="small">
           <el-input v-model="employeeForm.location" size="small"></el-input>
         </el-form-item>
-        <el-form-item label="socialCode" size="small">
+        <el-form-item label="社保号" size="small">
           <el-input v-model="employeeForm.socialCode" size="small" ></el-input>
         </el-form-item>
-        <el-form-item label="tax" prop="tax" size="small">
-          <el-input v-model="employeeForm.tax" size="small" :disabled="employeeForm.type!=='2'"></el-input>
+        <el-form-item label="税"  size="small">
+          <el-input v-model="employeeForm.tax" size="small" disabled></el-input>
         </el-form-item>
-        <el-form-item label="otherTax" prop="otherTax" size="small">
-          <el-input v-model="employeeForm.otherTax" size="small" :disabled="employeeForm.type!=='2'"></el-input>
+        <el-form-item label="其他扣除额"  size="small">
+          <el-input v-model="employeeForm.otherTax" size="small" disabled></el-input>
         </el-form-item>
-        <el-form-item label="薪资(每月)" prop="salary" size="small">
-          <el-input v-model="employeeForm.salary" size="small" :disabled="employeeForm.type!=='2'"></el-input>
+        <el-form-item label="薪资(每月)"  size="small">
+          <el-input v-model="employeeForm.salary" size="small" disabled></el-input>
         </el-form-item>
-        <el-form-item label="percent" prop="percent" size="small">
-          <el-input v-model="employeeForm.percent" size="small" :disabled="employeeForm.type!=='2'"></el-input>
+        <el-form-item label="佣金率" prop="percent" size="small">
+<!--          <el-input v-model="employeeForm.percent" size="small" disabled></el-input>-->
+          <el-select v-model="employeeForm.percent" size="small" disabled>
+            <el-option label="无佣金" value=0></el-option>
+            <el-option label="0.1" value=0.1></el-option>
+            <el-option label="0.15" value=0.15></el-option>
+            <el-option label="0.25" value=0.25></el-option>
+            <el-option label="0.35" value=0.35></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="lenLimit" prop="lenLimit" size="small">
-          <el-input v-model="employeeForm.lenLimit" size="small" :disabled="employeeForm.type!=='2'"></el-input>
+        <el-form-item label="工时限制" prop="lenLimit" size="small">
+          <el-input v-model="employeeForm.lenLimit" size="small" disabled></el-input>
         </el-form-item>
 
         <el-form-item label="支付方式" prop="payType" size="small">

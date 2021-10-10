@@ -62,7 +62,7 @@ const routes = [
       },
       {
         path: '/admin_management',
-        name: '报告管理',
+        name: '管理报告',
         component: Admin_Management
       },
       /*{

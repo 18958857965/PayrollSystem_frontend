@@ -12,7 +12,7 @@
       </el-select>
 
 
-      <el-select v-model="send.employeeId" multiple placeholder="请选择员工" class="inputInfo" style="margin-right: 100px"
+      <el-select v-model="send.uid"  placeholder="请选择员工" class="inputInfo" style="margin-right: 100px"
                  size="small">
         <el-option
             v-for="item in employees"
@@ -32,7 +32,7 @@
       <span style="margin-left: 10px;margin-right: 10px">至</span>
       <el-date-picker
           class="inputInfo"
-          v-model="send.endingTime"
+          v-model="send.endTime"
           type="datetime"
           placeholder="选择截止日期时间"
           value-format="yyyy-MM-dd HH:mm:ss">
@@ -44,7 +44,7 @@
 
     <div>
 
-      <img v-for="item in srcs" :src="item" alt="">
+      <img  :src="src" alt="">
 
     </div>
     <div>
@@ -64,8 +64,8 @@
         </el-col>
         <el-col :span="5">
           <el-button round @click="renderReport">确认生成报告</el-button>
-          <el-button type="primary" icon="el-icon-download" circle @click="download"></el-button>
-          <el-button type="success" icon="el-icon-share" circle @click="share"></el-button>
+<!--          <el-button type="primary" icon="el-icon-download" circle @click="download"></el-button>
+          <el-button type="success" icon="el-icon-share" circle @click="share"></el-button>-->
         </el-col>
 
 
@@ -84,12 +84,14 @@ export default {
   data() {
     return {
       employees: [],
-      srcs: [],
+      src: '',
       //unfmtEmployeeId: [],
       send: {
-        employeeId: [],
+        uid: this.$store.state.employee.uid,
+
+
         startTime: '',
-        endingTime: '',
+        endTime: '',
         pid: ''
       },
 
@@ -104,14 +106,13 @@ export default {
         },
         {
           label: '工资',
-          value: 1,
+          value: 3,
         }
       ]
     }
   },
   mounted() {
     this.getEmployees();
-
   },
   methods: {
     getEmployees() {
@@ -127,29 +128,28 @@ export default {
 
 
       if (this.send.startTime &&
-          this.send.endingTime &&
-          this.reportType!==null &&
-          this.send.employeeId &&
-          this.send.employeeId.length > 0) {
+          this.send.endTime &&
+          this.reportType !== null &&
+          this.send.uid
+      ) {
         /*for(let i=0;i<this.unfmtEmployeeId.length;i++){
-          this.send.employeeId.push(this.unfmtEmployeeId[i].value)
+          this.send.uid.push(this.unfmtEmployeeId[i].value)
         }*/
-
+        console.log('/report/drawOther?cid=' + this.$store.state.company.cid + '&code=' + this.reportType);
+        console.log(this.send)
         this.postRequest('/report/drawOther?cid=' + this.$store.state.company.cid + '&code=' + this.reportType, this.send).then(resp => {
-          console.log(resp)
-          if (resp.result && resp.result.length > 0) {
-            for (let i = 0; i < resp.result.length; i++) {
-              this.srcs[i] = resp.result[i]
-            }
+
+          if (resp) {
+            this.src = resp.result;
           } else {
-            this.$message.error('填写的项目编号有误');
+            this.$message.error('选择信息有误');
 
           }
         })
 
 
       } else {
-        this.$message.error('请选择并填写完整信息');
+        this.$message.error('请选择完整信息');
 
       }
 
