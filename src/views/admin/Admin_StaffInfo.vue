@@ -403,6 +403,21 @@ export default {
 
     },
     doUpdate() {
+      if(this.updateStaff.payType==='直接付款'){
+        this.updateStaff.payType='0';
+      }else if(this.updateStaff.payType==='邮寄支票'){
+        this.updateStaff.payType='1';
+      }else if(this.updateStaff.payType==='银行卡收款'){
+        this.updateStaff.payType='2';
+      }
+      if(this.updateStaff.type==='小时工'){
+        this.updateStaff.type='0'
+
+      }else if(this.updateStaff.type==='雇佣工'){
+        this.updateStaff.type='1'
+      }else if(this.updateStaff.type==='管理员'){
+        this.updateStaff.type='2'
+      }
       this.postRequest('/employee/updateOther?cid=' + this.$store.state.company.cid + '&uid=' + this.updateStaff.uid, this.updateStaff).then(resp => {
         if (resp) {
           this.initStaffTable();
