@@ -9,8 +9,8 @@ proxyObj['/']={
 
     //target address 后端地址
 
-
-    target:'http://49.140.61.112/salary',
+    target:'http://10.151.223.224/salary',
+   // target:'http://49.140.61.112/salary',
     //target:'http://localhost:8081',
 
     

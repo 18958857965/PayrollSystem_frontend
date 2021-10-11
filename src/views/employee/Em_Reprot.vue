@@ -43,17 +43,11 @@
 
         </el-input>
       </div>
-
     </div>
-
-
     <div>
-
       <img :src="this.src" alt="">
-
     </div>
     <div>
-
       <el-row>
         <el-col :span="4">
           <div class="grid-content"></div>
@@ -72,16 +66,10 @@
 <!--          <el-button type="primary" icon="el-icon-download" circle @click="download"></el-button>
           <el-button type="success" icon="el-icon-share" circle @click="share"></el-button>-->
         </el-col>
-
-
       </el-row>
-
     </div>
-
-
   </div>
 </template>
-
 <script>
 export default {
   name: "Em_Reprot",
@@ -96,7 +84,6 @@ export default {
         endTime: '',
         pid: ''
       },
-
       options: [
         {
           label: '工作小时数',

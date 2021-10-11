@@ -22,12 +22,12 @@ axios.interceptors.response.use(
     success => {
 
         //业务逻辑错误
-        if (success.status && success.status == 200) {//接口调用成功
-            if (success.data.code == 500 || success.data.code == 401 || success.data.code == 403) {//错误响应码,有需要再加
+        if (success.status && success.status === 200) {//接口调用成功
+            if (success.data.code === 500 || success.data.code === 401 || success.data.code === 403) {//错误响应码,有需要再加
                 Message.error({ message: success.data.result });
                 return;
             }
-            if (success.data.message) {
+            if (success.data.message&&success.data.code === 200) {
                 Message.success({ message: success.data.result });
             }
         }
@@ -35,14 +35,14 @@ axios.interceptors.response.use(
     },
     error => {
 
-        if (error.response.code == 504 || error.response.code == 404) {
+        if (error.response.code === 504 || error.response.code === 404) {
             Message.error({ message: '无法访问页面' });
         }
-        else if (error.response.code == 403) {
+        else if (error.response.code === 403) {
             Message.error({ message: '权限不足,请联系管理员' });
 
         }
-        else if (error.response.code == 401) {
+        else if (error.response.code === 401) {
             Message.error({ message: '尚未登陆请先登录' });
             router.replace('/');//返回登录
         }
