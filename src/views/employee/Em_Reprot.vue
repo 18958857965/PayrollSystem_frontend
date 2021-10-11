@@ -28,7 +28,7 @@
       >
       </el-date-picker>
       <div v-if="reportType===1" class="inputInfo" style="margin-top: 5px;">
-        <el-input placeholder="请输入项目id" clearable v-model="send.pid" size="small" style="width: 220px">
+<!--        <el-input placeholder="请输入项目id" clearable v-model="send.pid" size="small" style="width: 220px"></el-input>-->
           <el-select v-model="send.pid" @change="showProject" placeholder="请选择项目" filterable class="inputInfo"
                      style="margin-right: 100px" size="small" clearable>
             <el-option
@@ -41,7 +41,7 @@
             </el-option>
           </el-select>
 
-        </el-input>
+
       </div>
     </div>
     <div>
@@ -170,6 +170,9 @@ export default {
     share() {
 
     },
+  },
+  mounted() {
+    this.getProject();
   }
 
 }

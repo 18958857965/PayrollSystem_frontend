@@ -5,8 +5,8 @@
       <el-header class="homeHeader">
         <div class="title">工资单管理系统</div>
         <el-dropdown class="userInfo" @command="commandHandler" style=" float: right;margin-left: 1170px">
-                    <span class="el-dropdown-link"  >
-                        <div >
+                    <span class="el-dropdown-link">
+                        <div>
                                尊敬的   [{{ this.$store.state.user.name }}]  ,您好
 
                         </div>
@@ -29,7 +29,7 @@
       </el-header>
       <el-container>
         <el-aside width="200px" v-if="this.$store.state.employee">
-          <el-menu @select="menuClick"  >
+          <el-menu @select="menuClick">
             <el-submenu index="1">
               <template slot="title"
               ><i class="el-icon-location"></i
@@ -41,11 +41,13 @@
                 工作记录
               </el-menu-item>
 
-              <el-menu-item v-if="this.$store.state.employee&&(this.$store.state.employee.type==='1'||this.$store.state.employee.type==='2')" index="/sa_record">
+              <el-menu-item
+                  v-if="this.$store.state.employee&&(this.$store.state.employee.type==='1'||this.$store.state.employee.type==='2')"
+                  index="/sa_record">
                 工作记录
               </el-menu-item>
               <el-menu-item index="/em_report">员工报告</el-menu-item>
-<!--              <el-menu-item index="/em_paymethod">付款方式</el-menu-item>-->
+              <!--              <el-menu-item index="/em_paymethod">付款方式</el-menu-item>-->
 
             </el-submenu>
             <el-submenu index="2" v-if="this.$store.state.employee&&this.$store.state.employee.type==='2'">
@@ -67,12 +69,48 @@
             <el-breadcrumb-item>{{ this.$router.currentRoute.name }}</el-breadcrumb-item>
 
           </el-breadcrumb>
-          <div class="homeWelcome" v-if="this.$router.currentRoute.path=='/home'">
-            <h3 style="text-align:center">广告出租 ! ! !</h3>
-            <h4 style="text-align:center">广告出租 ! ! !</h4>
-            <h5 style="text-align:center">广告出租 ! ! !</h5>
-            <h6 style="text-align:center">广告出租 ! ! !</h6>
+          <div v-if="this.$router.currentRoute.path=='/home'">
+            <div style="float: left">
+              <div class="left-wrap">
+                <div class="calendar-wrap">
+                  <el-calendar :first-day-of-week=7 style="width: 900px">
+                    <!--                <template
+                                        slot="dateCell"
+                                        slot-scope="{date, data}">
+                                      <p>
+                                        {{ data.day.split('-').slice(2).join('-') }}<br />
+                                      </p>
+                                      &lt;!&ndash;标记&ndash;&gt;
+                                      <div v-if="data.day=='2020-08-23'||data.day=='2020-08-19'" class="red budge"></div>
+                                      <div v-if="data.day=='2020-08-09'||data.day=='2020-08-13'" class="green budge"></div>
+                                      <div v-if="data.day=='2020-08-12'||data.day=='2020-08-22'" class="orange budge"></div>
+                                    </template>-->
+                  </el-calendar>
+                </div>
+              </div>
+            </div>
 
+            <div style="float: right;width: 300px;margin-top: 50px">
+              <el-input
+
+                  placeholder="欢迎使用Payroll System !"
+                  v-model="emp">
+
+
+              </el-input>
+              <div style="margin-top: 70px">
+                <span >备忘录</span>
+                <el-divider></el-divider>
+                <el-input
+                    style="height: 200px"
+                    type="textarea"
+                    :autosize="{ minRows: 2, maxRows: 6}"
+                    placeholder="请输入内容"
+                    v-model="note">
+                </el-input>
+              </div>
+
+            </div>
           </div>
 
           <router-view class="homeRouterView"/>
@@ -83,13 +121,13 @@
                :visible.sync="selfSpace"
                width="50%"
                height="70%"
-    class="selfSpaceDialog">
+               class="selfSpaceDialog">
 
       <SelfSpace></SelfSpace>
-<!--      <div slot="footer" class="dialog-footer">
-        <el-button size="small" @click="selfSpace = false">取 消</el-button>
-        <el-button size="small" type="primary" @click="selfSpace = false">确 定</el-button>
-      </div>-->
+      <!--      <div slot="footer" class="dialog-footer">
+              <el-button size="small" @click="selfSpace = false">取 消</el-button>
+              <el-button size="small" type="primary" @click="selfSpace = false">确 定</el-button>
+            </div>-->
     </el-dialog>
   </div>
 </template>
@@ -115,11 +153,11 @@ export default {
             .then(() => {
               this.postRequest('/logout');
               //清除用户信息
-             // window.sessionStorage.removeItem('isLogin');
-              this.$store.commit('initUser','');
-              this.$store.commit('initEmployee','');
-              this.$store.commit('initCompany','');
-              this.$store.commit('initIsLogin','');
+              // window.sessionStorage.removeItem('isLogin');
+              this.$store.commit('initUser', '');
+              this.$store.commit('initEmployee', '');
+              this.$store.commit('initCompany', '');
+              this.$store.commit('initIsLogin', '');
               if (window.sessionStorage.getItem('state')) {
                 window.sessionStorage.removeItem('state');
 
@@ -145,10 +183,11 @@ export default {
     },
 
 
-
   },
   data() {
     return {
+      curDate: '',
+      note: '',
       selfSpace: false,
       user: JSON.parse(window.sessionStorage.getItem('user')),
       company: '',
@@ -156,7 +195,7 @@ export default {
 
     };
   },
-   mounted() {
+  mounted() {
     //this.user=JSON.parse(window.sessionStorage.getItem('user'));
 
     /*this.getCompany();
@@ -178,9 +217,10 @@ export default {
 
 
 <style scoped>
-.selfSpaceDialog{
+.selfSpaceDialog {
 
 }
+
 .homeHeader {
   background: rgb(163, 247, 235);
   display: flex;
@@ -194,16 +234,35 @@ export default {
   cursor: pointer;
 }
 
-.homeWelcome {
+/*.homeWelcome {
   text-align: center;
   font-size: 40px;
   font-family: 华文楷体;
   color: #409eff;
   padding-top: 50px;
-}
+}*/
 
 .homeRouterView {
   margin-top: 10px;
 }
+
+
+.left-wrap /deep/ .el-calendar-table .el-calendar-day {
+  padding: 22px;
+  text-align: center;
+  height: 80px;
+}
+
+.left-wrap /deep/ .el-backtop, .el-calendar-table td.is-today p {
+  height: 30px;
+  width: 30px;
+  color: white;
+  border-radius: 15px;
+  line-height: 30px;
+  margin: 0 auto;
+  margin-top: -6px;
+  background-image: linear-gradient(to right, #2160dc, #4880f0);
+}
+
 
 </style>

@@ -8,7 +8,14 @@
       <el-button @click="getCode">获取验证码</el-button>
     </el-form-item>
     <el-form-item label="新密码"  size="small">
-      <el-input v-model="submitForm.newPwd" size="small" disabled></el-input>
+      <el-input v-model="submitForm.newPwd" size="small" ></el-input>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" plain @click="submitChange" size="small"
+      >确认修改
+      </el-button
+      >
+
     </el-form-item>
 
   </el-form>
@@ -20,17 +27,16 @@ export default {
   data(){
     return{
       submitForm:{
-        phone:'',
+        phone:this.$store.state.user.phone,
         code:'',
         newPwd:''
       }
     }
-
   },
   methods:{
     getCode() {
       if (this.submitForm.phone) {
-        this.postRequest("/修改密码", this.submitForm).then(resp => {
+        this.postRequest('/change', this.submitForm).then(resp => {
           if (resp.result===true) {
             this.$message('验证码已发送')
           }
@@ -39,7 +45,7 @@ export default {
     },
     submitChange(){
       if(this.submitForm.phone&&this.submitForm.code!==0){
-        this.postRequest("/修改密码", this.submitForm).then(resp => {
+        this.postRequest('/change?code='+this.submitForm.code+'&pwd='+this.submitForm.newPwd).then(resp => {
           if (resp.result===true) {
             this.$message('修改成功 !')
           }
@@ -51,5 +57,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

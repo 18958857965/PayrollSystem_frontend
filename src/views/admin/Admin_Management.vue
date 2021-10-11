@@ -16,9 +16,9 @@
                  size="small">
         <el-option
             v-for="item in employees"
-            :key="item.id"
+            :key="item.uid"
             :label="item.name"
-            :value="item.id">
+            :value="item.uid">
         </el-option>
       </el-select>
 
@@ -87,7 +87,7 @@ export default {
       src: '',
       //unfmtEmployeeId: [],
       send: {
-        uid: this.$store.state.employee.uid,
+        uid: '',
 
 
         startTime: '',
@@ -135,8 +135,9 @@ export default {
         /*for(let i=0;i<this.unfmtEmployeeId.length;i++){
           this.send.uid.push(this.unfmtEmployeeId[i].value)
         }*/
-        console.log('/report/drawOther?cid=' + this.$store.state.company.cid + '&code=' + this.reportType);
-        console.log(this.send)
+        //let num='1231231';
+        /*console.log('/report/drawOther?cid=' + this.$store.state.company.cid + '&code=' + this.reportType);
+        console.log(this.send)*/
         this.postRequest('/report/drawOther?cid=' + this.$store.state.company.cid + '&code=' + this.reportType, this.send).then(resp => {
 
           if (resp) {
