@@ -14,7 +14,7 @@
           stripe
           style="width: 100%">
         <template slot="empty">
-          <img src="../../assets/src=http___img.zcool.cn_community_01eca95b5edad7a801215c8f2e2bcc.gif&refer=http___img.zcool.gif" class="loading" >
+          <img src="../../assets/src=http___img.zcool.cn_community_01eca95b5edad7a801215c8f2e2bcc.gif&refer=http___img.zcool.gif" class="loading" style="width: 300px">
 
         </template>
         <el-table-column
@@ -164,8 +164,5 @@ export default {
 .updateOR {
   width: 200px;
 }
-.loading{
-  width: 300px;
-  position: absolute
-}
+
 </style>

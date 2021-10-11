@@ -486,9 +486,6 @@ export default {
   margin-top: 6px;
 }
 
-.loading {
-  width: 300px;
-  position: absolute
-}
+
 
 </style>

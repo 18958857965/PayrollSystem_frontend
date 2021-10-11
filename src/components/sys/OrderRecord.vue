@@ -278,9 +278,9 @@ export default {
     }
   },
   mounted() {
-
-    this.initORTable();
     this.getGoods();
+    this.initORTable();
+
 
 
   },
@@ -364,35 +364,7 @@ export default {
       })
 
     },
-    /*deleteMany() {
 
-
-      this.$confirm('此操作将永久删除所选记录, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        let ids = '?';
-        this.multipleSelection.forEach(item => {
-          ids += 'ids=' + item.id + '&';
-
-        });
-        this.postRequest('/删除订单记录的接口' + ids).then(resp => {
-          if (resp) {
-            this.initORTable();
-          }
-        })
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        });
-      });
-    },*/
     handleSelectionChange(val) {
       this.multipleSelection = val;
 
@@ -454,19 +426,22 @@ export default {
       });
     },*/
     initORTable() {
-      this.postRequest('/order/getAll?cid=' + this.$store.state.company.cid).then(async (resp)=> {
+      this.postRequest('/order/getAll?cid=' + this.$store.state.company.cid).then(resp=> {
         if (resp) {
           if (resp.result.length && resp.result.length > 0) {
             for (let i = 0; i < resp.result.length; i++) {
               resp.result[i].startTime = resp.result[i].startTime.substring(0, 10);
               resp.result[i].endTime = resp.result[i].endTime.substring(0, 10);
               if (resp.result[i].goodId) {
-                await this.postRequest('/goods/get?cid=' + this.$store.state.company.cid + '&goodsId=' + resp.result[i].goodId).then(respa => {
-                  if (respa) {
-                    let pro = respa.result;
+                for(let j=0;j<this.goods.length;j++){
+                  if(this.goods[j].id===resp.result[i].goodId){
+
+                    let pro = this.goods[j];
                     this.$set(resp.result[i], "gname", pro.name);
+                    break;
                   }
-                })
+                }
+
               }
             }
             this.ORData = resp.result;
@@ -499,8 +474,5 @@ export default {
 .inputInfo {
   margin: 3px 6px 3px 6px;
 }
-.loading{
-  width: 300px;
-  position: absolute
-}
+
 </style>

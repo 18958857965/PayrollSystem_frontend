@@ -145,8 +145,9 @@ export default {
     }
   },
   mounted() {
-    this.initARTable();
     this.getProject();
+    this.initARTable();
+
   },
   methods: {
     showProject() {
@@ -208,35 +209,24 @@ export default {
       }
     },
     initARTable() {
-      this.postRequest('/sign/sign?cid=' + this.$store.state.company.cid, this.emp).then(async(resp) => {
+      this.postRequest('/sign/sign?cid=' + this.$store.state.company.cid, this.emp).then(resp => {
             if (resp) {
               if (resp.result.length && resp.result.length > 0){
                 for (let i = 0; i < resp.result.length; i++) {
                   resp.result[i].time = resp.result[i].time.substring(0, 10);
+
                   if (resp.result[i].pid) {
-                    await this.postRequest('/project/get?cid=' + this.$store.state.company.cid + '&pid=' + resp.result[i].pid).then(respa => {
-                      if (respa) {
-                        let pro = respa.result;
+                    for(let j=0;j<this.project.length;j++){
+                      if(this.project[j].id===resp.result[i].pid){
+
+                        let pro = this.project[j];
                         this.$set(resp.result[i], "pname", pro.name);
+                        break;
                       }
-                    })
+                    }
                   }
                 }
                 this.ARData = resp.result;
-                //console.log(this.ARData);
-                /*for (let i = 0; i < this.ARData.length; i++) {
-                  this.ARData[i].time = this.ARData[i].time.substring(0, 10);
-                  if (this.ARData[i].pid) {
-                    await this.postRequest('/project/get?cid=' + this.$store.state.company.cid + '&pid=' + this.ARData[i].pid).then(respa => {
-                      if (respa) {
-                        let pro = respa.result;
-
-                        this.$set(this.ARData[i], "pname", pro.name);
-
-                      }
-                    })
-                  }
-                }*/
               }
             }
           }
@@ -266,8 +256,5 @@ export default {
 .inputInfo {
   margin: 3px 6px 3px 6px;
 }
-.loading{
-  width: 300px;
-  position: absolute
-}
+
 </style>

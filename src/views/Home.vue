@@ -12,18 +12,14 @@
                         </div>
                     </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="userinfo"
-            >个人中心
-            </el-dropdown-item
-            >
-            <el-dropdown-item command="setting" v-if="this.$store.state.employee&&this.$store.state.employee.type==='2'"
-            >申请消息
-            </el-dropdown-item
-            >
-            <el-dropdown-item command="logout"
-            >退出系统
-            </el-dropdown-item
-            >
+            <el-dropdown-item command="userinfo">
+              个人中心
+            </el-dropdown-item>
+
+
+            <el-dropdown-item command="logout">
+              退出系统
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -92,14 +88,12 @@
 
             <div style="float: right;width: 300px;margin-top: 50px">
               <el-input
-
                   placeholder="欢迎使用Payroll System !"
                   v-model="emp">
 
-
               </el-input>
               <div style="margin-top: 70px">
-                <span >备忘录</span>
+                <span>备忘录</span>
                 <el-divider></el-divider>
                 <el-input
                     style="height: 200px"
@@ -186,6 +180,7 @@ export default {
   },
   data() {
     return {
+      emp: '',
       curDate: '',
       note: '',
       selfSpace: false,
@@ -196,14 +191,13 @@ export default {
     };
   },
   mounted() {
-    //this.user=JSON.parse(window.sessionStorage.getItem('user'));
+    if (window.localStorage.getItem('note')) {
+      this.note = window.localStorage.getItem('note')
 
-    /*this.getCompany();
-    if (this.company) {
-      this.getEmployee();
-      this.storeCid();
-      this.storeUserType()
-    }*/
+
+    } else {
+      window.localStorage.setItem('note', this.note)
+    }
 
 
   },
