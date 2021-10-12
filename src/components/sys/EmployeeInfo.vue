@@ -8,7 +8,7 @@
         <el-form-item label="员工id" size="small">
           <el-input v-model="employeeForm.id" size="small" disabled></el-input>
         </el-form-item>
-        <el-form-item label="用户id"  size="small">
+        <el-form-item label="用户id" size="small">
           <el-input v-model="employeeForm.uid" size="small" disabled></el-input>
         </el-form-item>
         <el-form-item label="公司id" size="small">
@@ -18,29 +18,32 @@
           <el-input v-model="employeeForm.name" size="small"></el-input>
         </el-form-item>
         <el-form-item label="员工类型" prop="type" size="small">
-          <el-select v-model="employeeForm.type" size="small" :disabled="employeeForm.type!=='2'">
+
+          <el-select v-model="employeeForm.type" size="small" :disabled="true">
             <el-option label="小时工" value="0"></el-option>
             <el-option label="雇佣工" value="1"></el-option>
             <el-option label="管理员" value="2"></el-option>
           </el-select>
+
         </el-form-item>
+
         <el-form-item label="居住地址" size="small">
           <el-input v-model="employeeForm.location" size="small"></el-input>
         </el-form-item>
         <el-form-item label="社保号" size="small">
-          <el-input v-model="employeeForm.socialCode" size="small" ></el-input>
+          <el-input v-model="employeeForm.socialCode" size="small"></el-input>
         </el-form-item>
-        <el-form-item label="税"  size="small">
+        <el-form-item label="税" size="small">
           <el-input v-model="employeeForm.tax" size="small" disabled></el-input>
         </el-form-item>
-        <el-form-item label="其他扣除额"  size="small">
+        <el-form-item label="其他扣除额" size="small">
           <el-input v-model="employeeForm.otherTax" size="small" disabled></el-input>
         </el-form-item>
-        <el-form-item label="薪资(每月)"  size="small">
+        <el-form-item label="薪资(每月)" size="small">
           <el-input v-model="employeeForm.salary" size="small" disabled></el-input>
         </el-form-item>
         <el-form-item label="佣金率" prop="percent" size="small">
-<!--          <el-input v-model="employeeForm.percent" size="small" disabled></el-input>-->
+          <!--          <el-input v-model="employeeForm.percent" size="small" disabled></el-input>-->
           <el-select v-model="employeeForm.percent" size="small" disabled>
             <el-option label="无佣金" value=0></el-option>
             <el-option label="0.1" value=0.1></el-option>
@@ -64,7 +67,6 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" plain @click="updateEmployee" size="small">确认修改</el-button>
-
         </el-form-item>
 
 
@@ -81,29 +83,27 @@ export default {
   name: "EmployeeInfo",
   methods: {
     updateEmployee() {
-      this.$refs.employeeForm.validate((valid) => {
-        if (valid) {
 
-          this.postRequest('/employee/update?cid='+this.$store.state.company.cid, this.employeeForm).then(resp => {
-            if (resp) {
-              this.$store.commit('initEmployee', this.employeeForm);
-              this.$message({
-                type: 'success',
-                message: '修改成功!'
-              });
 
-            }
-          })
-
+      this.postRequest('/employee/update?cid=' + this.$store.state.company.cid, this.employeeForm).then(resp => {
+        if (resp) {
+          this.$store.commit('initEmployee', this.employeeForm);
+          this.$message({
+            type: 'success',
+            message: '修改成功!'
+          });
 
         }
       })
+
+
     },
 
 
   },
   data() {
     return {
+      etype:this.$store.state.employee.type,
       employeeForm: this.$store.state.employee,
 
       company: this.$store.state.company,
@@ -151,9 +151,7 @@ export default {
             trigger: "blur",
           },
         ],
-        type: [
-          {required: true, message: '请选择员工类型', trigger: 'change'}
-        ],
+
         payType: [
           {required: true, message: '请选择支付方式', trigger: 'change'}
         ],

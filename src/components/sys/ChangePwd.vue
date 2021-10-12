@@ -4,8 +4,8 @@
       <el-input v-model="submitForm.phone" size="small" disabled></el-input>
     </el-form-item>
     <el-form-item label="验证码"  size="small">
-      <el-input v-model="submitForm.code" size="small" ></el-input>
-      <el-button @click="getCode">获取验证码</el-button>
+      <el-input v-model="submitForm.code" size="small" style="width: 180px"></el-input>
+      <el-button @click="getCode" style="float: right">获取验证码</el-button>
     </el-form-item>
     <el-form-item label="新密码"  size="small">
       <el-input v-model="submitForm.newPwd" size="small" ></el-input>
