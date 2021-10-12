@@ -32,32 +32,32 @@
         <el-table-column
             prop="id"
             label="员工id"
-            width="90">
+            width="150">
         </el-table-column>
         <el-table-column
             prop="uid"
             label="用户id"
-            width="90">
+            width="150">
         </el-table-column>
         <el-table-column
             prop="name"
             label="员工姓名"
-            width="90">
+            width="120">
         </el-table-column>
         <el-table-column
             prop="type"
             label="员工类型"
-            width="90">
+            width="100">
         </el-table-column>
         <el-table-column
             prop="location"
             label="居住地"
-            width="90">
+            width="150">
         </el-table-column>
         <el-table-column
             prop="socialCode"
             label="社保号"
-            width="90">
+            width="100">
         </el-table-column>
         <el-table-column
             prop="tax"
@@ -87,14 +87,14 @@
         <el-table-column
             prop="cid"
             label="公司id"
-            width="90">
+            width="150">
         </el-table-column>
         <el-table-column
             prop="payType"
             label="支付方式"
-            width="90">
+            width="100">
         </el-table-column>
-        <el-table-column label="操作" fixed="right" width="150" v-if="this.$store.state.employee.type==='2'">
+        <el-table-column label="操作" fixed="right" width="120" v-if="this.$store.state.employee.type==='2'">
           <template slot-scope="scope">
             <el-button
                 size="mini"
