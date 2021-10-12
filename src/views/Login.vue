@@ -244,48 +244,48 @@ export default {
 
                 this.$store.commit('initIsLogin', '1');
                 //window.sessionStorage.setItem('isLogin',1);
+                if (!this.$store.state.user && !this.$store.state.company) {
+                  await Promise.all([this.postRequest('/user/getInfo').then(respa => {
+                    if (respa) {
 
-              }
-              if (!this.$store.state.user && !this.$store.state.company) {
-                await Promise.all([this.postRequest('/user/getInfo').then(respa => {
-                  if (respa) {
-
-                    let data = respa.result;
-                    this.$store.commit('initUser', data);
-                  }
-                }),
-                  this.postRequest('/employee/getCompany').then(respb => {
-                    if (respb) {
-
-                      if (respb.result.length && respb.result.length > 0) {
-                        let data = respb.result[0];
-                        this.$store.commit('initCompany', data);
-
-
-                        let cid = this.$store.state.company.cid;
-
-                        this.postRequest('/employee/get?cid=' + cid).then(respc => {
-                          if (respc) {
-                            let datae = respc.result;
-                            this.$store.commit('initEmployee', datae);
-
-
-                          }
-                        })
-
-                      }
+                      let data = respa.result;
+                      this.$store.commit('initUser', data);
                     }
-                  })]);
+                  }),
+                    this.postRequest('/employee/getCompany').then(respb => {
+                      if (respb) {
+
+                        if (respb.result.length && respb.result.length > 0) {
+                          let data = respb.result[0];
+                          this.$store.commit('initCompany', data);
+
+
+                          let cid = this.$store.state.company.cid;
+
+                          this.postRequest('/employee/get?cid=' + cid).then(respc => {
+                            if (respc) {
+                              let datae = respc.result;
+                              this.$store.commit('initEmployee', datae);
+
+
+                            }
+                          })
+
+                        }
+                      }
+                    })]);
+                }
+                let path = this.$route.query.redirect;
+                if (!(path === "/" || path === undefined))
+                  this.$router.replace(path);
+                else {
+                  /*if (!window.sessionStorage.getItem('employee')) {
+                    this.$router.replace("/userhome");
+                  } else {*/
+                  this.$router.replace("/home");
+                }
               }
-              let path = this.$route.query.redirect;
-              if (!(path === "/" || path === undefined))
-                this.$router.replace(path);
-              else {
-                /*if (!window.sessionStorage.getItem('employee')) {
-                  this.$router.replace("/userhome");
-                } else {*/
-                this.$router.replace("/home");
-              }
+
             }
 
           }).catch((err) => {

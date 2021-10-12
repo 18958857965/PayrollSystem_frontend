@@ -73,7 +73,7 @@
       </el-form>
     </div>
     <div v-else>
-      no employeeinfo
+      暂时不是公司雇员,请联系管理员
     </div>
   </div>
 </template>
