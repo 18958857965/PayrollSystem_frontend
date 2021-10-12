@@ -20,23 +20,23 @@
         <el-table-column
             prop="id"
             label="项目编号"
-            width="90">
+            width="150">
         </el-table-column>
         <el-table-column
             prop="cid"
             label="公司编号"
-            width="90">
+            width="150">
         </el-table-column>
         <el-table-column
             fixed
             prop="name"
             label="项目名称"
-            width="90">
+            width="150">
         </el-table-column>
         <el-table-column
             prop="description"
             label="项目描述"
-            width="90">
+            >
         </el-table-column>
 
       </el-table>

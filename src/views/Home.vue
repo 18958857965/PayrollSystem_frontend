@@ -145,7 +145,7 @@ export default {
           type: "warning",
         })
             .then(() => {
-              this.postRequest('/logout');
+              //this.postRequest('/logout');
               //清除用户信息
               // window.sessionStorage.removeItem('isLogin');
               this.$store.commit('initUser', '');

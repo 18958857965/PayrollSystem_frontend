@@ -25,43 +25,43 @@
             fixed
             prop="time"
             label="签到时间"
-            width="90">
+            width="120">
         </el-table-column>
         <el-table-column
             v-if="false"
             prop="id"
             label="签到编号"
-            width="90">
+            >
         </el-table-column>
         <el-table-column
 
             prop="cid"
             label="公司编号"
-            width="90">
+            width="200">
         </el-table-column>
         <el-table-column
 
             prop="employeeId"
             label="员工编号"
-            width="90">
+            width="200">
         </el-table-column>
         <el-table-column
             v-if="false"
             prop="pid"
             label="项目编号"
-            width="90">
+            >
         </el-table-column>
         <el-table-column
 
             prop="pname"
             label="项目"
-            width="90">
+            width="120">
         </el-table-column>
 
         <el-table-column
             prop="len"
             label="时长"
-            width="180">
+           >
         </el-table-column>
 
         <!--        <el-table-column label="操作">

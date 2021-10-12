@@ -25,56 +25,56 @@
             fixed
             prop="startTime"
             label="开始日期"
-            width="90">
+            width="120">
         </el-table-column>
         <el-table-column
             fixed
             prop="endTime"
             label="截止日期"
-            width="90">
+            width="120">
         </el-table-column>
         <el-table-column
             v-if="false"
             prop="id"
             label="订单编号"
-            width="90">
+            >
         </el-table-column>
         <el-table-column
             prop="guestName"
             label="客户姓名"
-            width="220">
+            width="120">
         </el-table-column>
         <el-table-column
             prop="guestPhone"
             label="联络方式"
-            width="90">
+            width="120">
         </el-table-column>
         <el-table-column
             prop="guestLocation"
             label="账单地址"
-            width="90">
+            width="200">
         </el-table-column>
 
         <el-table-column
             v-if="false"
             prop="goodId"
             label="产品编号"
-            width="90">
+            >
         </el-table-column>
         <el-table-column
 
             prop="gname"
             label="产品"
-            width="90">
+            width="120">
         </el-table-column>
 
         <el-table-column
             prop="price"
             label="金额"
-            width="80">
+            width="120">
         </el-table-column>
 
-        <el-table-column label="操作" fixed="right" width="150">
+        <el-table-column label="操作" fixed="right" >
           <template slot-scope="scope">
             <el-button
                 size="mini"

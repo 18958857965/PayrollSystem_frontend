@@ -23,37 +23,37 @@
             type="selection"
             width="40" v-if="this.$store.state.employee.type==='2'">
         </el-table-column>
-
+        <el-table-column
+            fixed
+            prop="name"
+            label="商品名称"
+            width="120">
+        </el-table-column>
         <el-table-column
 
 
             prop="id"
             label="商品编号"
-            width="90">
+            width="200">
         </el-table-column>
         <el-table-column
 
 
             prop="cid"
             label="公司编号"
-            width="90">
+            width="200">
         </el-table-column>
-        <el-table-column
-            fixed
-            prop="name"
-            label="商品名称"
-            width="90">
-        </el-table-column>
+
         <el-table-column
 
             prop="price"
             label="商品价格"
-            width="90">
+            width="120">
         </el-table-column>
         <el-table-column
             prop="description"
             label="商品描述"
-            width="90">
+            width="200">
         </el-table-column>
         <el-table-column
             fixed="right"
@@ -69,7 +69,7 @@
         </el-table-column>
 
 
-        <el-table-column label="操作" fixed="right" width="150" v-if="this.$store.state.employee.type==='2'" >
+        <el-table-column label="操作" fixed="right"  v-if="this.$store.state.employee.type==='2'" >
           <template slot-scope="scope">
             <el-button
                 size="mini"
