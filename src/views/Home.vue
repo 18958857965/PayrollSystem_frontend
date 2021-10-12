@@ -4,7 +4,7 @@
     <el-container>
       <el-header class="homeHeader">
         <div>工资单管理系统</div>
-        <el-dropdown class="userInfo" @command="commandHandler" style=" float: right;margin-left: 1200px">
+        <el-dropdown class="userInfo" @command="commandHandler" style=" float:right;margin-left: 1200px">
                     <span class="el-dropdown-link">
                         <div>
                                尊敬的   [{{ this.$store.state.user.name }}]  ,您好

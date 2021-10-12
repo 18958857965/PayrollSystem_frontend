@@ -59,6 +59,7 @@ router.beforeEach((to, from, next) => {
         if (to.path == '/') {
             next();
         } else {
+            Message.error('请先登录 !');
             next('/?redirecat=' + to.path);
         }
 
