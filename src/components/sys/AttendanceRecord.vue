@@ -90,7 +90,8 @@
               v-model="addAR[0].time"
               type="date"
               placeholder="选择日期"
-              value-format="yyyy-MM-dd">
+              value-format="yyyy-MM-dd"
+              :picker-options="expireTimeOption">
           </el-date-picker>
         </div>
         <div></div>
@@ -129,7 +130,20 @@
 export default {
   name: "AttendanceRecord",
   data() {
+
+
     return {
+
+      expireTimeOption: {
+        disabledDate(date) {
+          //disabledDate 文档上：设置禁用状态，参数为当前日期，要求返回 Boolean
+          return (
+              date.getTime() > Date.now() ||
+              date.getTime() < Date.now() - 1000 * 3600 * 24 * 10
+          );
+        }
+      },
+
       AR_add: false,
       project: [],
       emp: [],
@@ -218,7 +232,6 @@ export default {
                   if (resp.result[i].pid) {
                     for(let j=0;j<this.project.length;j++){
                       if(this.project[j].id===resp.result[i].pid){
-
                         let pro = this.project[j];
                         this.$set(resp.result[i], "pname", pro.name);
                         break;

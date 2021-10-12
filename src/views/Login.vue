@@ -175,7 +175,6 @@ export default {
           if (resp) {
 
             if (resp.result === true) {
-
               this.$store.commit('initIsLogin', '1');
               //window.sessionStorage.setItem('isLogin',1);
 
@@ -194,19 +193,13 @@ export default {
                     if (respb.result.length && respb.result.length > 0) {
                       let data = respb.result[0];
                       this.$store.commit('initCompany', data);
-
-
                       let cid = this.$store.state.company.cid;
-
                       this.postRequest('/employee/get?cid=' + cid).then(respc => {
                         if (respc) {
                           let datae = respc.result;
                           this.$store.commit('initEmployee', datae);
-
-
                         }
                       })
-
                     }
                   }
                 })]);

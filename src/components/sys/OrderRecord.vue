@@ -15,7 +15,6 @@
           style="width: 100%">
         <template slot="empty">
           <img class="loading" src="../../assets/src=http___img.zcool.cn_community_01eca95b5edad7a801215c8f2e2bcc.gif&refer=http___img.zcool.gif"  alt="">
-
         </template>
         <el-table-column
             fixed
@@ -109,9 +108,9 @@
 
               class="updateOR"
               v-model="updateOR.startTime"
-              type="datetime"
+              type="date"
               placeholder="选择开始日期"
-              value-format="yyyy-MM-dd HH:mm:ss">
+              value-format="yyyy-MM-dd">
           </el-date-picker>
         </div>
         <div class="block">
@@ -120,9 +119,9 @@
 
               class="updateOR"
               v-model="updateOR.endTime"
-              type="datetime"
+              type="date"
               placeholder="选择截止日期"
-              value-format="yyyy-MM-dd HH:mm:ss">
+              value-format="yyyy-MM-dd">
           </el-date-picker>
         </div>
         <div></div>
@@ -174,9 +173,9 @@
 
               class="updateOR"
               v-model="addOR.startTime"
-              type="datetime"
+              type="date"
               placeholder="选择开始日期"
-              value-format="yyyy-MM-dd HH:mm:ss">
+              value-format="yyyy-MM-dd">
           </el-date-picker>
         </div>
         <div class="block">
@@ -185,9 +184,9 @@
 
               class="updateOR"
               v-model="addOR.endTime"
-              type="datetime"
+              type="date"
               placeholder="选择截止日期"
-              value-format="yyyy-MM-dd  HH:mm:ss">
+              value-format="yyyy-MM-dd">
           </el-date-picker>
         </div>
         <div></div>
@@ -285,7 +284,6 @@ export default {
 
   },
   methods: {
-
     showGoods() {
       this.$notify.closeAll();
 
@@ -351,7 +349,8 @@ export default {
     },
     doUpdate() {
 
-
+      this.updateOR.startTime+=' 00:00:00';
+      this.updateOR.endTime+=' 00:00:00';
       this.postRequest('/order/update?cid=' + this.$store.state.company.cid, this.updateOR).then(resp => {
         if (resp) {
           this.initORTable();
@@ -364,7 +363,6 @@ export default {
       })
 
     },
-
     handleSelectionChange(val) {
       this.multipleSelection = val;
 
@@ -374,6 +372,8 @@ export default {
     },
     doAdd() {
       if (this.addOR.guestLocation && this.addOR.employeeId && this.addOR.cid && this.addOR.endTime && this.addOR.startTime && this.addOR.goodId && this.addOR.guestName && this.addOR.guestPhone && this.addOR.price) {
+        this.addOR.startTime+=' 00:00:00';
+        this.addOR.endTime+=' 00:00:00';
 
         this.addOR.cid = this.$store.state.company.cid;
         this.addOR.employeeId = this.$store.state.employee.id;
@@ -426,7 +426,7 @@ export default {
       });
     },*/
     initORTable() {
-      this.postRequest('/order/getAll?cid=' + this.$store.state.company.cid).then(resp=> {
+      this.postRequest('/order/getEmployee?cid=' + this.$store.state.company.cid).then(resp=> {
         if (resp) {
           if (resp.result.length && resp.result.length > 0) {
             for (let i = 0; i < resp.result.length; i++) {
