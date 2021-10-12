@@ -16,11 +16,11 @@
         <template slot="empty">
           <img class="loading" src="../../assets/src=http___img.zcool.cn_community_01eca95b5edad7a801215c8f2e2bcc.gif&refer=http___img.zcool.gif"  alt="">
         </template>
-        <el-table-column
+<!--        <el-table-column
             fixed
             type="selection"
             width="40">
-        </el-table-column>
+        </el-table-column>-->
         <el-table-column
             fixed
             prop="startTime"

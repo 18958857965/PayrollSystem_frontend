@@ -45,7 +45,7 @@
 
 
     <el-dialog
-        title="添加商品"
+        title="添加项目"
         :visible.sync="project_add"
         width="30%">
       <div>
@@ -135,7 +135,7 @@ export default {
         })
 
       } else {
-        this.$message.error('添加失败,请输入完整的商品信息 !');
+        this.$message.error('添加失败,请输入完整的项目信息 !');
 
       }
 

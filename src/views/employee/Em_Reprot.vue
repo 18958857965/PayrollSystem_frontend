@@ -146,6 +146,7 @@ export default {
         if (this.reportType !== '项目总工时' || (this.reportType === '项目总工时' && this.send.pid)) {
           this.postRequest('/report/draw?cid=' + this.$store.state.company.cid + '&code=' + this.reportType,this.send).then(resp => {
             if (resp) {
+
               this.src = resp.result;
             } else {
               this.$message.error('填写的项目编号有误');

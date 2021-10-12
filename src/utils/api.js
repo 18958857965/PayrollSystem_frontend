@@ -51,7 +51,7 @@ axios.interceptors.response.use(
                 Message.error({ message: error.response.data.result });
             }
             else {
-                Message.error({ message: 'Error unexpected occurred ! ' });
+                Message.error({ message: 'Unexpected error occurred ! ' });
             }
         }
         return;
