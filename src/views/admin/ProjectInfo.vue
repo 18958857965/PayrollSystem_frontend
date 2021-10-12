@@ -164,5 +164,12 @@ export default {
 .updateOR {
   width: 200px;
 }
+.tag{
+  text-align: center;
+  width:70px;
+  margin-right: 10px;
+
+  margin-top:6px;
+}
 
 </style>

@@ -102,7 +102,7 @@
         <el-input v-model="updateOR.id" size="small" class="updateOR" :disabled="true"></el-input>
         <div></div>
 
-        <div class="block">
+        <div class="block" style="margin-bottom: 5px">
 
           <el-date-picker
 
@@ -110,7 +110,8 @@
               v-model="updateOR.startTime"
               type="date"
               placeholder="选择开始日期"
-              value-format="yyyy-MM-dd">
+              value-format="yyyy-MM-dd"
+          >
           </el-date-picker>
         </div>
         <div class="block">

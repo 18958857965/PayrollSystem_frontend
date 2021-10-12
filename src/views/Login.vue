@@ -285,6 +285,9 @@ export default {
                   this.$router.replace("/home");
                 }
               }
+              else{
+                this.$message.error('登陆信息有误')
+              }
 
             }
 
@@ -333,9 +336,5 @@ export default {
   font-size: 25px;
 }
 
-.radioclass {
 
-  margin: 0px auto 0px auto;
-
-}
 </style>
