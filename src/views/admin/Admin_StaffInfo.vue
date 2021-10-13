@@ -71,7 +71,7 @@
         </el-table-column>
         <el-table-column
             prop="salary"
-            label="薪资(每月)"
+            label="薪资"
             width="90">
         </el-table-column>
         <el-table-column
@@ -94,7 +94,7 @@
             label="支付方式"
             width="100">
         </el-table-column>
-        <el-table-column label="操作" fixed="right" width="120" v-if="this.$store.state.employee.type==='2'">
+        <el-table-column label="操作" fixed="right" width="200" v-if="this.$store.state.employee.type==='2'">
           <template slot-scope="scope">
             <el-button
                 size="mini"
@@ -150,7 +150,7 @@
         <el-tag class="tag">其他扣除额</el-tag>
         <el-input v-model="addStaff.otherTax" size="small" class="updateOR"></el-input>
         <div></div>
-        <el-tag class="tag">薪资(每月)</el-tag>
+        <el-tag class="tag">薪资</el-tag>
         <el-input v-model="addStaff.salary" size="small" class="updateOR"></el-input>
         <div></div>
         <el-tag class="tag">佣金率</el-tag>
@@ -226,7 +226,7 @@
         <el-tag class="tag">其他扣除额</el-tag>
         <el-input v-model="updateStaff.otherTax" size="small" class="updateOR"></el-input>
         <div></div>
-        <el-tag class="tag">薪资(每月)</el-tag>
+        <el-tag class="tag" >薪资</el-tag>
         <el-input v-model="updateStaff.salary" size="small" class="updateOR"></el-input>
         <div></div>
         <el-tag class="tag">佣金率</el-tag>
@@ -316,15 +316,15 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-
     handleEdit(index, data) {
-      console.log(data)
+
       if(data.type==='管理员'){
         this.$message.error(
           '不能操作管理员'
         );
 
       }else{
+        console.log(data)
         Object.assign(this.updateStaff, data);
         this.staff_update = true;
       }
@@ -418,6 +418,11 @@ export default {
       }else if(this.updateStaff.type==='管理员'){
         this.updateStaff.type='2'
       }
+      this.updateStaff.otherTax=Number(this.updateStaff.otherTax)
+      this.updateStaff.tax=Number(this.updateStaff.tax)
+      this.updateStaff.salary=Number(this.updateStaff.salary)
+      this.updateStaff.percent=Number(this.updateStaff.percent)
+      console.log(this.updateStaff)
       this.postRequest('/employee/updateOther?cid=' + this.$store.state.company.cid + '&uid=' + this.updateStaff.uid, this.updateStaff).then(resp => {
         if (resp) {
           this.initStaffTable();

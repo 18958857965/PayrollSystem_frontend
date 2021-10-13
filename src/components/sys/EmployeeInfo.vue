@@ -39,7 +39,10 @@
         <el-form-item label="其他扣除额" size="small">
           <el-input v-model="employeeForm.otherTax" size="small" disabled></el-input>
         </el-form-item>
-        <el-form-item label="薪资(每月)" size="small">
+        <el-form-item label="薪资(每月)" size="small" v-if="this.$store.state.employee.type==='1'">
+          <el-input v-model="employeeForm.salary" size="small" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="薪资(每时)" size="small" v-if="this.$store.state.employee.type==='0'">
           <el-input v-model="employeeForm.salary" size="small" disabled></el-input>
         </el-form-item>
         <el-form-item label="佣金率" prop="percent" size="small">
